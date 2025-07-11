@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# Safe Drive Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React frontend application for connecting to a Java backend API.
 
-## Available Scripts
+## 🏗️ Project Structure
 
-In the project directory, you can run:
+```
+src/
+├── components/
+│   ├── auth/           # Authentication components
+│   ├── common/         # Shared UI components
+│   ├── credentials/    # Credential management
+│   ├── files/         # File management
+│   └── notes/         # Notes management
+├── hooks/             # Custom React hooks
+├── services/          # API service layer
+└── utils/            # Utilities and constants
+```
 
-### `npm start`
+## 🚀 Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js (v14 or higher)
+- npm or yarn
+- Java backend server running on `http://localhost:8080`
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Install dependencies**
 
-### `npm run build`
+   ```bash
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Configure backend connection**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   The frontend is configured to connect to a Java backend at `http://localhost:8080`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   To change the backend URL, update `src/utils/constants.js`:
 
-### `npm run eject`
+   ```javascript
+   export const API_BASE_URL =
+     process.env.REACT_APP_API_URL || "http://localhost:8080/api";
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   Or set the environment variable:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```env
+   REACT_APP_API_URL=http://localhost:8080/api
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Start the frontend**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```bash
+   npm start
+   ```
 
-## Learn More
+4. **Access the application**
+   Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔧 Backend Connection
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### API Configuration
 
-### Code Splitting
+- **Base URL**: `http://localhost:8080/api`
+- **Proxy**: Development server proxies requests to backend
+- **Authentication**: JWT token-based
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Required Backend Endpoints
 
-### Analyzing the Bundle Size
+The frontend expects these Java backend endpoints:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **Authentication**: `/auth/login`, `/auth/register`
+- **Files**: `/files`, `/files/upload`, `/files/{id}`
+- **Notes**: `/notes`, `/notes/{id}`
+- **Credentials**: `/credentials`, `/credentials/{id}`, `/credentials/{id}/password`
 
-### Making a Progressive Web App
+### CORS Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Ensure your Java backend allows CORS requests from `http://localhost:3000`:
 
-### Advanced Configuration
+```java
+// Example Spring Boot CORS configuration
+@CrossOrigin(origins = "http://localhost:3000")
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📋 Available Scripts
 
-### Deployment
+- `npm start` - Start development server
+- `npm test` - Run tests
+- `npm run build` - Build for production
+- `npm run eject` - Eject from Create React App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🐛 Troubleshooting
 
-### `npm run build` fails to minify
+### Backend Connection Issues
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Backend not running**: Ensure Java backend is started on port 8080
+2. **CORS errors**: Check backend CORS configuration
+3. **API errors**: Verify backend endpoints match expected structure
+
+### Debug Tools
+
+- Use browser developer tools to check network requests
+- Check console for API error messages
+- Verify authentication tokens in localStorage
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+The build artifacts will be in the `build/` directory.

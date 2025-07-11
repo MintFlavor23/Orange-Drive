@@ -1,0 +1,111 @@
+:root {
+  --primary: #ff9800;
+  --primary-dark: #f57c00;
+  --primary-light: #ffe0b2;
+  --background: #fff3e0;
+  --sidebar-bg: #ffe0b2;
+  --accent: #ffd180;
+  --text: #333;
+}
+
+body {
+  background: var(--background) !important;
+  color: var(--text);
+}
+
+.h-screen.bg-gray-50,
+.bg-gray-50 {
+  background: var(--background) !important;
+}
+
+.sidebar,
+.w-64.bg-white.shadow-lg.h-full.flex.flex-col {
+  background: var(--sidebar-bg) !important;
+}
+
+.bg-white {
+  background: #fffdfa !important;
+}
+
+.bg-blue-600,
+.bg-blue-700,
+.bg-blue-100,
+.bg-blue-50 {
+  background-color: var(--primary) !important;
+}
+
+.text-blue-600,
+.text-blue-800 {
+  color: var(--primary-dark) !important;
+}
+
+.focus\:ring-blue-500:focus {
+  --tw-ring-color: var(--primary) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px var(--accent) !important;
+}
+
+button,
+.button,
+.btn-primary {
+  color: #fff;
+  border: none;
+  transition: background 0.2s;
+}
+
+button:hover,
+.button:hover,
+.btn-primary:hover {
+}
+
+/* Accent backgrounds */
+.bg-blue-100,
+.bg-blue-50 {
+  background-color: var(--primary-light) !important;
+}
+
+/* Notification colors (success, error, info) remain as is for clarity */
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.sidebar .sidebar-active {
+  background: var(--primary-light) !important;
+  color: var(--primary-dark) !important;
+  border-left: 4px solid var(--primary-dark);
+  font-weight: bold;
+}
+
+.sidebar button.sidebar-active {
+  background: var(--primary-light) !important;
+  color: var(--primary-dark) !important;
+  border-left: 4px solid var(--primary-dark);
+  font-weight: bold;
+}
+
+.sidebar button:hover {
+  background: #ffb74d !important;
+}

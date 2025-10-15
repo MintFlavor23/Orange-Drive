@@ -28,7 +28,7 @@ RUN mkdir -p uploads
 # Expose port
 EXPOSE 8080
 
-# Set environment variables
+# Set default environment variables (will be overridden by Render)
 ENV SPRING_PROFILES_ACTIVE=prod
 ENV UPLOAD_DIR=/app/uploads
 

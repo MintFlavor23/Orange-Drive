@@ -28,6 +28,7 @@ This guide will help you deploy OrangeDrive to Render for free.
    - **Name**: `orangedrive-backend`
    - **Environment**: `Docker`
    - **Dockerfile Path**: `./Dockerfile`
+   - **Root Directory**: `./` (leave empty or set to root)
    - **Plan**: Free
 
 4. **Set Environment Variables**

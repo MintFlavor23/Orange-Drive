@@ -1,8 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:safedrive}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${DATABASE_URL:jdbc:postgresql://safedrive:JuStHilFqVJAdCg7HmHMiI51Heg0tDAZ@dpg-d3nk8149c44c73ebe0g0-a/safedrive_jp4y}
+    driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 20
       minimum-idle: 5

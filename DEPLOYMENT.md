@@ -23,7 +23,7 @@ This guide will help you deploy OrangeDrive to Render for free.
 
 3. **Configure Backend Service**
    - **Name**: `orangedrive-backend`
-   - **Environment**: `Java`
+   - **Environment**: `Java` (should auto-detect now!)
    - **Build Command**: `./mvnw clean package -DskipTests`
    - **Start Command**: `java -jar target/safeDrive-0.0.1-SNAPSHOT.jar`
    - **Plan**: Free

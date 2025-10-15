@@ -31,19 +31,6 @@ organizational use.
 **Credential Page**  
 ![Credential Page](credentialPage.png)
 
-## Project Structure
-
-- **Backend**: Handles authentication, file uploads, secure storage, and API endpoints. Built with Java and Spring Boot. See `backend/README.md` for details.
-- **Frontend**: Provides a user-friendly web interface for managing files, notes, and credentials. Built with React. See `frontend/README.md` for details.
-
-## Key Features
-
-- Secure user authentication and authorization
-- File upload, download, and management
-- Notes and credential storage
-- User-specific data isolation
-- Designed for deployment on local or cloud servers
-
 ## Getting Started
 
 To get started, refer to the README files in the `backend` and `frontend` directories for setup and usage instructions.

@@ -13,28 +13,32 @@ This guide will help you deploy OrangeDrive to Render for free.
 ### Step 1: Deploy Backend (Spring Boot + PostgreSQL)
 
 1. **Go to Render Dashboard**
+
    - Visit [render.com](https://render.com) and sign in
    - Click "New +" → "Web Service"
 
 2. **Connect GitHub Repository**
+
    - Select "Build and deploy from a Git repository"
    - Connect your GitHub account
    - Select your OrangeDrive repository
 
 3. **Configure Backend Service**
+
    - **Name**: `orangedrive-backend`
-   - **Environment**: `Java` (should auto-detect now!)
-   - **Build Command**: `./mvnw clean package -DskipTests`
-   - **Start Command**: `java -jar target/safeDrive-0.0.1-SNAPSHOT.jar`
+   - **Environment**: `Docker`
+   - **Dockerfile Path**: `./Dockerfile`
    - **Plan**: Free
 
 4. **Set Environment Variables**
+
    - `SPRING_PROFILES_ACTIVE`: `prod`
    - `JWT_SECRET`: Generate a random secret (32+ characters)
    - `ENCRYPTION_SECRET`: Generate a random secret (32+ characters)
    - `UPLOAD_DIR`: `/opt/render/project/src/uploads`
 
 5. **Add PostgreSQL Database**
+
    - Click "New +" → "PostgreSQL"
    - **Name**: `orangedrive-db`
    - **Plan**: Free
@@ -49,16 +53,19 @@ This guide will help you deploy OrangeDrive to Render for free.
 ### Step 2: Deploy Frontend (React)
 
 1. **Create New Web Service**
+
    - Click "New +" → "Static Site"
    - Connect your GitHub repository
 
 2. **Configure Frontend Service**
+
    - **Name**: `orangedrive-frontend`
    - **Build Command**: `cd frontend && npm install && npm run build`
    - **Publish Directory**: `frontend/build`
    - **Plan**: Free
 
 3. **Set Environment Variables**
+
    - `REACT_APP_API_URL`: `https://your-backend-url.onrender.com/api`
    - Replace `your-backend-url` with your actual backend URL
 
@@ -67,6 +74,7 @@ This guide will help you deploy OrangeDrive to Render for free.
 ### Step 3: Test Your Deployment
 
 1. **Check Backend Health**
+
    - Visit: `https://your-backend-url.onrender.com/actuator/health`
    - Should return: `{"status":"UP"}`
 
@@ -78,6 +86,7 @@ This guide will help you deploy OrangeDrive to Render for free.
 ## Environment Variables Summary
 
 ### Backend Environment Variables
+
 ```
 SPRING_PROFILES_ACTIVE=prod
 DATABASE_URL=postgresql://user:pass@host:port/dbname
@@ -87,6 +96,7 @@ UPLOAD_DIR=/opt/render/project/src/uploads
 ```
 
 ### Frontend Environment Variables
+
 ```
 REACT_APP_API_URL=https://your-backend-url.onrender.com/api
 ```
@@ -96,16 +106,19 @@ REACT_APP_API_URL=https://your-backend-url.onrender.com/api
 ### Common Issues
 
 1. **Build Fails**
+
    - Check build logs in Render dashboard
    - Ensure Java 17 is selected
    - Verify Maven wrapper permissions
 
 2. **Database Connection Issues**
+
    - Verify `DATABASE_URL` is correctly set
    - Check PostgreSQL service is running
    - Ensure database credentials are correct
 
 3. **Frontend Can't Connect to Backend**
+
    - Verify `REACT_APP_API_URL` is set correctly
    - Check CORS settings in backend
    - Ensure backend is running and healthy

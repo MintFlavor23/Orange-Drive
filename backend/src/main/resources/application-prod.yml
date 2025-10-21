@@ -9,38 +9,71 @@ spring:
       idle-timeout: 600000
       max-lifetime: 1800000
 
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: ${SHOW_SQL:false}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+    open-in-view: false
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  security:
+    require-ssl: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
   management:
     endpoints:
       web:
         exposure:
           include: health,info,metrics
-
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    show-sql: false
-
-  security:
-    require-ssl: true
+    endpoint:
+      health:
+        show-details: when-authorized
 
 logging:
   level:
-    com.safedrive: INFO
-    org.springframework.security: WARN
-    org.hibernate.SQL: WARN
+    com.safedrive: ${LOG_LEVEL:INFO}
+    org.springframework.security: ${SECURITY_LOG_LEVEL:WARN}
+    org.hibernate.SQL: ${SQL_LOG_LEVEL:WARN}
+    org.hibernate.type.descriptor.sql.BasicBinder: ${HIBERNATE_LOG_LEVEL:WARN}
+    org.flywaydb: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
-    name: /var/log/safe-drive/application.log
-    max-size: 10MB
-    max-history: 30
+    name: ${LOG_FILE:logs/safe-drive.log}
 
 server:
-  port: ${SERVER_PORT:8080}
-  ssl:
-    enabled: ${SSL_ENABLED:false}
-    key-store: ${SSL_KEY_STORE:}
-    key-store-password: ${SSL_KEY_STORE_PASSWORD:}
-    key-store-type: ${SSL_KEY_STORE_TYPE:PKCS12}
+  port: ${PORT:8080}
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+  http2:
+    enabled: true
 
 app:
   upload:
-    dir: ${UPLOAD_DIR:/var/safe-drive/uploads}
+    dir: ${UPLOAD_DIR:/app/uploads}
+    max-size: ${MAX_FILE_SIZE:50MB}
+  jwt:
+    secret: ${JWT_SECRET:myVerySecretKeyThatIsLongEnoughForHS256Algorithm}
+    expiration: ${JWT_EXPIRATION:86400000}
+  encryption:
+    secret: ${ENCRYPTION_SECRET:MySecretKey12345}

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @Configuration
 public class DatabaseConfig {
@@ -17,13 +19,24 @@ public class DatabaseConfig {
 
     @Bean
     @Primary
-    public DataSource dataSource() {
+    public DataSource dataSource() throws URISyntaxException {
         HikariConfig config = new HikariConfig();
         
-        // Convert postgresql:// to jdbc:postgresql:// if needed
-        String jdbcUrl = databaseUrl;
+        String jdbcUrl;
+        
         if (databaseUrl.startsWith("postgresql://")) {
-            jdbcUrl = databaseUrl.replace("postgresql://", "jdbc:postgresql://");
+            // Parse the postgresql:// URL and convert to jdbc format
+            URI dbUri = new URI(databaseUrl);
+            String username = dbUri.getUserInfo().split(":")[0];
+            String password = dbUri.getUserInfo().split(":")[1];
+            String host = dbUri.getHost();
+            int port = dbUri.getPort();
+            String path = dbUri.getPath();
+            
+            jdbcUrl = String.format("jdbc:postgresql://%s:%d%s?user=%s&password=%s", 
+                host, port, path, username, password);
+        } else {
+            jdbcUrl = databaseUrl;
         }
         
         config.setJdbcUrl(jdbcUrl);

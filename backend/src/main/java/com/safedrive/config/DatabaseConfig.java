@@ -32,14 +32,14 @@ public class DatabaseConfig {
             String host = dbUri.getHost();
             int port = dbUri.getPort();
             String path = dbUri.getPath();
-            
+
             // Use default PostgreSQL port if not specified
             if (port == -1) {
                 port = 5432;
             }
-            
-            jdbcUrl = String.format("jdbc:postgresql://%s:%d%s?user=%s&password=%s", 
-                host, port, path, username, password);
+
+            jdbcUrl = String.format("jdbc:postgresql://%s:%d%s?user=%s&password=%s",
+                    host, port, path, username, password);
         } else {
             jdbcUrl = databaseUrl;
         }

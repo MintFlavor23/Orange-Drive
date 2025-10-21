@@ -170,4 +170,29 @@ public class AuthController {
                     "error", e.getMessage()));
         }
     }
+
+    @GetMapping("/debug/users")
+    public ResponseEntity<?> debugUsers() {
+        try {
+            List<User> users = userService.getAllUsers();
+            List<Map<String, Object>> userInfo = users.stream()
+                    .map(user -> Map.of(
+                            "id", user.getId(),
+                            "name", user.getName(),
+                            "email", user.getEmail(),
+                            "role", user.getRole(),
+                            "createdAt", user.getCreatedAt()
+                    ))
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(Map.of(
+                    "totalUsers", users.size(),
+                    "users", userInfo,
+                    "timestamp", System.currentTimeMillis()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "error", e.getMessage(),
+                    "timestamp", System.currentTimeMillis()));
+        }
+    }
 }

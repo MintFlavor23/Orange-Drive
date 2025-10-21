@@ -3,7 +3,7 @@ spring:
     name: safe-drive
 
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://safedrive:JuStHilFqVJAdCg7HmHMiI51Heg0tDAZ@dpg-d3nk8149c44c73ebe0g0-a/safedrive_jp4y}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/safedrive}
     driver-class-name: org.postgresql.Driver
 
   jpa:

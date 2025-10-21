@@ -21,9 +21,9 @@ public class DatabaseConfig {
     @Primary
     public DataSource dataSource() throws URISyntaxException {
         HikariConfig config = new HikariConfig();
-        
+
         String jdbcUrl;
-        
+
         if (databaseUrl.startsWith("postgresql://")) {
             // Parse the postgresql:// URL and convert to jdbc format
             URI dbUri = new URI(databaseUrl);
@@ -33,22 +33,27 @@ public class DatabaseConfig {
             int port = dbUri.getPort();
             String path = dbUri.getPath();
             
+            // Use default PostgreSQL port if not specified
+            if (port == -1) {
+                port = 5432;
+            }
+            
             jdbcUrl = String.format("jdbc:postgresql://%s:%d%s?user=%s&password=%s", 
                 host, port, path, username, password);
         } else {
             jdbcUrl = databaseUrl;
         }
-        
+
         config.setJdbcUrl(jdbcUrl);
         config.setDriverClassName("org.postgresql.Driver");
-        
+
         // Connection pool settings
         config.setMaximumPoolSize(20);
         config.setMinimumIdle(5);
         config.setConnectionTimeout(30000);
         config.setIdleTimeout(600000);
         config.setMaxLifetime(1800000);
-        
+
         return new HikariDataSource(config);
     }
 }

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -176,13 +177,15 @@ public class AuthController {
         try {
             List<User> users = userService.getAllUsers();
             List<Map<String, Object>> userInfo = users.stream()
-                    .map(user -> Map.of(
-                            "id", user.getId(),
-                            "name", user.getName(),
-                            "email", user.getEmail(),
-                            "role", user.getRole(),
-                            "createdAt", user.getCreatedAt()
-                    ))
+                    .map(user -> {
+                        Map<String, Object> userMap = new HashMap<>();
+                        userMap.put("id", user.getId());
+                        userMap.put("name", user.getName());
+                        userMap.put("email", user.getEmail());
+                        userMap.put("role", user.getRole());
+                        userMap.put("createdAt", user.getCreatedAt());
+                        return userMap;
+                    })
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok(Map.of(

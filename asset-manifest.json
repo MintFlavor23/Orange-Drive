@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Orange-Drive/static/css/main.7fca3a52.css",
+    "main.js": "/Orange-Drive/static/js/main.319a9a96.js",
+    "static/js/453.ff0ad4fc.chunk.js": "/Orange-Drive/static/js/453.ff0ad4fc.chunk.js",
+    "index.html": "/Orange-Drive/index.html",
+    "main.7fca3a52.css.map": "/Orange-Drive/static/css/main.7fca3a52.css.map",
+    "main.319a9a96.js.map": "/Orange-Drive/static/js/main.319a9a96.js.map",
+    "453.ff0ad4fc.chunk.js.map": "/Orange-Drive/static/js/453.ff0ad4fc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7fca3a52.css",
+    "static/js/main.319a9a96.js"
+  ]
+}

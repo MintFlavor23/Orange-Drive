@@ -38,7 +38,7 @@ jobs:
           cd frontend
           CI=false npm run build
         env:
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL || 'https://orangedrive-backend.onrender.com/api' }}
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL || 'https://orange-drive.onrender.com/api' }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

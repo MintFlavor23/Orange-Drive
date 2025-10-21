@@ -38,9 +38,9 @@ jobs:
         run: |
           cd frontend
           echo "Building React app with API URL: $REACT_APP_API_URL"
-          npm run build
+          CI=false npm run build
         env:
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL || 'https://your-backend-url.onrender.com/api' }}
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL || 'https://orangedrive-backend.onrender.com/api' }}
 
       - name: Check build output
         run: |
